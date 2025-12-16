@@ -1,7 +1,5 @@
-#AFTER PASTING YOUR ANSWER YOU MUST REMOVE THE LINE "import s"
-#YOUR CODE WILL FAIL IF YOU DO NOT DELETE THE LINE!!!!!!!!!!!!!
 # Testing flag - will be set by test
-TESTING = True
+TESTING = False  # <-- Should be False by default
 item = None
 price = None
 quantity = None
@@ -10,14 +8,13 @@ print("""
 ========================================
    WELCOME TO THE PECULIAR EMPORIUM!
    "Magical items at mundane prices!"
-
    Prosperity comes in threes!
 ========================================
-
 ITEM MENU:
 Invisibility Cloak.........$44.99
 Dragon Egg.....................$29.99
 """)
+
 menu = '''Flying Carpet...............$119.99
 Phoenix Feather...........$14.99
 Time Turner....................$84.99
@@ -27,9 +24,9 @@ Crystal Ball...................$39.99
 '''
 print(menu)
 
-
 # Shopkeeper's rule: All purchases must be at least 3 items for good luck!
 # (Don't worry - the shopkeeper checks every order himself)
+
 def get_purchase_info():
     item = input("Item name: ")
     price = float(input("Item price: "))
@@ -40,20 +37,15 @@ def get_purchase_info():
 if not TESTING:
     item, price, quantity = get_purchase_info()
 
-
-# Hidden calculations (using mock values for testing)
-item_name = "Crystal Ball"
-item_price = 39.99
-quantity = 2
-
-subtotal = item_price * quantity
+# Calculate using the input values (NOT hardcoded!)
+subtotal = price * quantity
 tax_rate = 0.095
 tax = subtotal * tax_rate
 total = subtotal + tax
 total = round(total, 2)
 
 # Print statements
-print(f"{item_name} x{quantity} @ ${item_price} each")
+print(f"{item} x{quantity} @ ${price} each")
 print(f"Subtotal: ${subtotal}")
 print(f"Tax: ${tax}")
 print(f"Total: ${total}")
