@@ -19,10 +19,16 @@ def test_01_check_hardcoding():
         with open('task2.py', 'r') as f:
             code = f.read()
         
+        # Replace the initial values to test if student hard-coded
         modified_code = code.replace('allowance = 15', 'allowance = 20')
-        modified_code = modified_code.replace('room = 5', 'room = 6')
-        modified_code = modified_code.replace('soda = 2', 'soda = 3')
-        modified_code = modified_code.replace('movie = 10', 'movie = 12')
+        modified_code = modified_code.replace(
+            'dishes, room, trash, lawn, laundry, vacuum = 3, 5, 2, 8, 4, 6',
+            'dishes, room, trash, lawn, laundry, vacuum = 3, 6, 2, 8, 4, 6'
+        )
+        modified_code = modified_code.replace(
+            'candy, soda, game, movie, toy, snack = 4, 2, 15, 10, 7, 3',
+            'candy, soda, game, movie, toy, snack = 4, 3, 15, 12, 7, 3'
+        )
         
         old_stdout = sys.stdout
         sys.stdout = StringIO()
@@ -34,7 +40,14 @@ def test_01_check_hardcoding():
         finally:
             sys.stdout = old_stdout
         
-        # Expected: 20 + 2 + 6 - 3 = 25, * 2 = 50, + 4 = 54, - 12 = 42, / 4 = 10.5
+        # Expected with modified values:
+        # Start: 20
+        # +trash(2), +room(6) = 28
+        # -soda(3) = 25
+        # *2 = 50
+        # +laundry(4) = 54
+        # -movie(12) = 42
+        # /4 = 10.5
         expected_final = 10.5
         
         # Check if hard-coded
