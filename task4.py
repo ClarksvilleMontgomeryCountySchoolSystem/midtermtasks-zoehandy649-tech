@@ -2,7 +2,7 @@
 #YOUR CODE WILL FAIL IF YOU DO NOT DELETE THE LINE!!!!!!!!!!!!!
 # Debugging Challenge - Fix the bugs in each code block
 # Each block is independent and can be fixed separately
-
+'''
 # Snippet 1:
 temperature = 75
 if temperature > 70:
@@ -59,3 +59,4 @@ if is_raining:
     print("Bring an umbrella!")
 else:
     print("Enjoy the sunshine!")
+'''
