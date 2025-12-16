@@ -53,7 +53,7 @@ total1 = subtotal + tax
 total = round(total1, 2)
 
 # Print statements
-print1 = f"{item_name} x{quantity} @ ${item_price} each"
-print2 = f"Subtotal: ${subtotal}"
-print3 = f"Tax: ${tax}"
-print4 = f"Total: ${total}"
+print(f"{item_name} x{quantity} @ ${item_price} each")
+print(f"Subtotal: ${subtotal}")
+print(f"Tax: ${tax}")
+print(f"Total: ${total}")
