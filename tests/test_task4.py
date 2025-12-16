@@ -7,13 +7,6 @@ from io import StringIO
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
-def test_file_imports():
-    """Test that task4.py imports without errors - Must pass for other tests to run"""
-    import task4
-    import importlib
-    importlib.reload(task4)
-
-
 def test_snippet_1_fixed():
     """Snippet 1: Missing colon - 1 point"""
     import task4
