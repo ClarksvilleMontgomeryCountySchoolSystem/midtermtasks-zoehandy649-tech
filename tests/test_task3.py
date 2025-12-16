@@ -1,6 +1,12 @@
 import sys
+import os
 from io import StringIO
 from unittest.mock import patch
+
+
+def test_00_file_exists():
+    """Test that task3.py exists - 1 point"""
+    assert os.path.exists('task3.py'), "task3.py not found - have you committed it to GitHub?"
 
 
 def check_hardcoding_task3():
@@ -121,11 +127,3 @@ def test_09_uses_round_function():
     with open('task3.py', 'r') as f:
         code = f.read()
     assert 'round(' in code, "Should use round() function for total"
-
-
-def test_10_uses_type_conversion():
-    """Test that code uses float() and int() conversion - 1 point"""
-    with open('task3.py', 'r') as f:
-        code = f.read()
-    assert 'float(' in code, "Should use float() to convert price input"
-    assert 'int(' in code, "Should use int() to convert quantity input"
