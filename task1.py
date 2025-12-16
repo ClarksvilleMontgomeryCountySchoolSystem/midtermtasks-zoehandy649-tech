@@ -16,7 +16,7 @@ print(f"Total candy collected: {candy_total}")
 # Part 2: Fair sharing (include yourself)
 people += 1
 share = candy_total//people
-leftover = candy_total//people
+leftover = candy_total%people
 print(f"Each person gets: {share}")
 print(f"Leftover candy: {leftover}")
 
@@ -26,6 +26,6 @@ print(f"Leftover candy: {leftover}")
 # Variable reassignment is fine - previous values were already printed
 people += 2
 share = candy_total//people
-leftover = candy_total//people
+leftover = candy_total%people
 print(f"Each person gets: {share}")
 print(f"Leftover candy: {leftover}")
