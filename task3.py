@@ -49,8 +49,8 @@ quantity = 2
 subtotal = item_price * quantity
 tax_rate = 0.095
 tax = subtotal * tax_rate
-total1 = subtotal + tax
-total = round(total1, 2)
+total = subtotal + tax
+total = round(total, 2)
 
 # Print statements
 print(f"{item_name} x{quantity} @ ${item_price} each")
