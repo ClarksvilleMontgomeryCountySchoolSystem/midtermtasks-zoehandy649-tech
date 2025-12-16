@@ -28,4 +28,4 @@ allowance -= movie
 allowance /= 4
 
 # Print final allowance
-print1 = f"Allowance: ${allowance}"
+print(f"Allowance: ${allowance}")
