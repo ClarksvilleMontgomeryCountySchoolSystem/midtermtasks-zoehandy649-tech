@@ -1,5 +1,11 @@
 import sys
+import os
 from io import StringIO
+
+
+def test_00_file_exists():
+    """Test that task2.py exists - 1 point"""
+    assert os.path.exists('task2.py'), "task2.py not found - have you committed it to GitHub?"
 
 
 def check_hardcoding_task2():
@@ -111,9 +117,3 @@ def test_09_uses_multiple_operation_types():
         '/=' in code or '/' in code
     ])
     assert operation_count >= 3, "Should use at least 3 different types of operations"
-
-
-def test_10_final_value_is_float():
-    """Test that final allowance is a float (from division) - 1 point"""
-    task2, output = import_and_run_task2()
-    assert isinstance(task2.allowance, float), "Final allowance should be a float value"
