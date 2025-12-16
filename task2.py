@@ -6,26 +6,26 @@ allowance = 15
 dishes, room, trash, lawn, laundry, vacuum = 3, 5, 2, 8, 4, 6
 candy, soda, game, movie, toy, snack = 4, 2, 15, 10, 7, 3
 
-balance = allowance
+
 # Week 1: You took out the trash and cleaned your room
-balance += trash
-a1 = balance
-balance += room
-a2 = balance
+allowance += trash
+
+allowance += room
+
 # You bought soda
-balance -= soda
-a3 = balance
+allowanc -= soda
+
 # Week 2: Parents gave you a bonus! They doubled your allowance for working hard
-balance *= 2
-a4 = balance
+allowance *= 2
+
 # You did the laundry
-balance += laundry
-a5 = balance
+allowance += laundry
+
 # You bought a new movie
-balance -= movie
-a6 = balance
+allowance -= movie
+
 # Week 3: You decided to put a fourth of your money in savings
-balance /= 4
-a7 = balance
+allowance /= 4
+
 # Print final allowance
-print1 = f"Allowance: ${balance}"
+print1 = f"Allowance: ${allowance}"
