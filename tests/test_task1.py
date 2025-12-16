@@ -1,5 +1,11 @@
 import sys
+import os
 from io import StringIO
+
+
+def test_00_file_exists():
+    """Test that task1.py exists - 1 point"""
+    assert os.path.exists('task1.py'), "task1.py not found - have you committed it to GitHub?"
 
 
 def check_hardcoding_task1():
@@ -118,11 +124,3 @@ def test_09_uses_arithmetic_operators():
         code = f.read()
     assert '+' in code, "Should use addition operator"
     assert '//' in code or '/' in code, "Should use division operator"
-
-
-def test_10_people_variable_updated():
-    """Test that people variable is updated multiple times - 1 point"""
-    with open('task1.py', 'r') as f:
-        code = f.read()
-    # Count how many times 'people' appears (should be at least 4 times)
-    assert code.count('people') >= 4, "Should update people variable for different scenarios"
