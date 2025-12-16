@@ -13,7 +13,7 @@ allowance += trash
 allowance += room
 
 # You bought soda
-allowanc -= soda
+allowance -= soda
 
 # Week 2: Parents gave you a bonus! They doubled your allowance for working hard
 allowance *= 2
