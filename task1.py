@@ -1,8 +1,5 @@
-#Given variables
-party_pizza_mini = 14
-large = 8
-medium = 6
-people = 6 #friends
+
+
 
 slices = party_pizza_mini + large + medium
 print(f”Number of slices: {slices}”)
