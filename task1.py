@@ -1,31 +1,30 @@
-#AFTER PASTING YOUR ANSWER YOU MUST REMOVE THE LINE "import s"
-#YOUR CODE WILL FAIL IF YOU DO NOT DELETE THE LINE!!!!!!!!!!!!!
+#Given variables
+party_pizza_mini = 14
+large = 8
+medium = 6
+people = 6 #friends
 
-people = 4  # friends who went trick-or-treating
-bg1 = 37
-bg2 = 22
-bg3 = 8
-bg4 = 30
+slices = party_pizza_mini + large + medium
+print(f”Number of slices: {slices}”)
 
-# Part 1: Combine the haul
-candy_total = bg1 + bg2 + bg3 + bg4
-print(f"Total candy collected: {candy_total}")
-
-
-
-# Part 2: Fair sharing (include yourself)
 people += 1
-share = candy_total//people
-leftover = candy_total%people
-print(f"Each person gets: {share}")
-print(f"Leftover candy: {leftover}")
+share = slices//people
+leftover = slices%people
+print(f”Each person gets: {share}”)
+print(f”Slices left: {leftover}”)
 
+people += 2 #Eric and Brandon are coming too.
+share = slices//people
+leftover = slices%people
+print(f”Each person gets: {share}”)
+print(f”Slices left: {leftover}”)
 
+#Mom says “Wait, Brandon’s coming. We’re going to need more pizza. I’ll upgrade the mini to a party_pizza instead. It’s the same as 2 minis. Hopefully the leftovers will be enough to fill his hollow leg.”
 
-# Part 3: Include the sick friends
-# Variable reassignment is fine - previous values were already printed
-people += 2
-share = candy_total//people
-leftover = candy_total%people
-print(f"Each person gets: {share}")
-print(f"Leftover candy: {leftover}")
+slices += party_pizza_mini  		#include tips. people won’t change maybe a hint about adding a mini.
+share = slices//people
+leftover = slices%people
+print(f”Each person gets: {share}”)
+print(f”Slices left: {leftover}”)
+print("...for Mr. Hollow Leg")
+
