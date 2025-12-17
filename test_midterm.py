@@ -1,6 +1,7 @@
 import pytest
 import subprocess
 import sys
+import re
 
 
 # TASK 1 TESTS
@@ -13,16 +14,18 @@ import sys
 
 def run_task1_with_test_values():
     """Run task1.py with modified test values and return output"""
-    code = """
-party_pizza_mini = 16
-large = 10
-medium = 8
-people = 5
-
-exec(open('task1.py').read())
-"""
+    # Read the student's task1.py
+    with open('task1.py', 'r') as f:
+        student_code = f.read()
+    
+    # Replace the given variable values with test values
+    student_code = re.sub(r'party_pizza_mini\s*=\s*\d+', 'party_pizza_mini = 16', student_code)
+    student_code = re.sub(r'large\s*=\s*\d+', 'large = 10', student_code)
+    student_code = re.sub(r'medium\s*=\s*\d+', 'medium = 8', student_code)
+    student_code = re.sub(r'people\s*=\s*\d+', 'people = 5', student_code)
+    
     result = subprocess.run(
-        [sys.executable, '-c', code],
+        [sys.executable, '-c', student_code],
         capture_output=True,
         text=True,
         timeout=5
