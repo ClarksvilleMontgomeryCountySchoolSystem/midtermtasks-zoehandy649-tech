@@ -1,62 +1,64 @@
-#AFTER PASTING YOUR ANSWER YOU MUST REMOVE THE LINE "import s"
-#YOUR CODE WILL FAIL IF YOU DO NOT DELETE THE LINE!!!!!!!!!!!!!
 # Debugging Challenge - Fix the bugs in each code block
 # Each block is independent and can be fixed separately
-'''
+
 # Snippet 1:
-temperature = 75
-if temperature > 70:
-    print("It's warm outside!")
+books = 12
+if books > 10:
+    print("You have a lot of books!")
 
 
 # Snippet 2:
-greeting = "Hello, welcome to our store"
-print(greeting)
+favorite_color = "blue"
+print(favorite_color)
 
 
 # Snippet 3:
-apples = 5
-oranges = 3
-total_fruit = apples + oranges
-print(f"Total fruit: {total_fruit}")
+cats = 3
+dogs = 2
+total_pets = cats + dogs
+print(f"Total pets: {total_pets}")
+
 
 # Snippet 4:
-has_ticket = True
-if has_ticket:
-    prize = 10
-    print(f"You won ${prize}!")
+is_sunny = True
+if is_sunny:
+    message = "Wear sunglasses"
+    print(message)
+
 
 # Snippet 5:
-def snippet_5():
-    age = int(input("Enter your age: "))
-    next_year = age + 1
-    print(f"Next year you'll be {next_year}")
+distance = 50
+time = 2
+speed = distance / time
+print(f"Speed: {speed} mph")
+
 
 # Snippet 6:
-cookies = 12
-share = cookies // 4
-print(f"Each person gets {share} cookies")
+level = 5
+if level == 5:
+    print("You reached level 5!")
+
 
 # Snippet 7:
-lives = 3
-lives = lives - 1
-if lives == 2:
-    print("You have 2 lives left")
+width = 8
+height = 10
+area = width * height
+print(f"Area: {area}")
+
 
 # Snippet 8:
-price = 15.99
-quantity = 2
-total = price * quantity
-print(f"Total: ${total}")
+name = "Sarah"
+print("Hello", name)
+
 
 # Snippet 9:
-score = 100
-print("Your score is:", score)
+hungry = False
+if hungry:
+    print("Time to eat!")
+else:
+    print("Not hungry yet")
+
 
 # Snippet 10:
-is_raining = False
-if is_raining:
-    print("Bring an umbrella!")
-else:
-    print("Enjoy the sunshine!")
-'''
+age = 15
+print(f"I am {age} years old")
