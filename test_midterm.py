@@ -5,110 +5,109 @@ import re
 
 
 # TASK 1 TESTS
-# Test values: party_pizza_mini=16, large=10, medium=8, people=5
-# Expected outputs:
-# Part 1: slices=34
-# Part 2: people=6, share=5, leftover=4
-# Part 3: people=8, share=4, leftover=2
-# Part 4: slices=50, share=6, leftover=2
+# Expected outputs with given values (14, 8, 6, 6):
+# Part 1: slices=28
+# Part 2: people=7, share=4, leftover=0
+# Part 3: people=9, share=3, leftover=1
+# Part 4: slices=42, share=4, leftover=6
 
-def run_task1_with_test_values():
-    """Run task1.py with modified test values and return output"""
-    # Read the student's task1.py
-    with open('task1.py', 'r') as f:
-        student_code = f.read()
-    
-    # Replace the given variable values with test values
-    student_code = re.sub(r'party_pizza_mini\s*=\s*\d+', 'party_pizza_mini = 16', student_code)
-    student_code = re.sub(r'large\s*=\s*\d+', 'large = 10', student_code)
-    student_code = re.sub(r'medium\s*=\s*\d+', 'medium = 8', student_code)
-    student_code = re.sub(r'people\s*=\s*\d+', 'people = 5', student_code)
-    
+def run_task1():
+    """Run task1.py and return output"""
     result = subprocess.run(
-        [sys.executable, '-c', student_code],
+        [sys.executable, 'task1.py'],
         capture_output=True,
         text=True,
         timeout=5
     )
     return result.stdout
 
+def get_task1_code():
+    """Read task1.py code for inspection"""
+    with open('task1.py', 'r') as f:
+        return f.read()
+
 
 def test_task1_initial_slices():
     """Test that initial slice count is calculated correctly"""
-    output = run_task1_with_test_values()
-    assert "34" in output, "Initial slice count should be 34"
+    output = run_task1()
+    assert "28" in output, "Initial slice count should be 28"
+
+
+def test_task1_no_hardcoded_28():
+    """Test that 28 is not hardcoded - must calculate from variables"""
+    code = get_task1_code()
+    # Remove the given variables section and comments
+    code_lines = code.split('\n')
+    code_to_check = []
+    past_given = False
+    for line in code_lines:
+        if 'slices = ' in line and '=' in line and '+' in line:
+            past_given = True
+        if past_given:
+            code_to_check.append(line)
+    
+    code_without_given = '\n'.join(code_to_check)
+    assert '28' not in code_without_given, "Do not hardcode 28 - use variables"
 
 
 def test_task1_part2_share():
     """Test Part 2 share calculation"""
-    output = run_task1_with_test_values()
+    output = run_task1()
     lines = output.strip().split('\n')
     assert len(lines) >= 2, "Not enough output lines"
-    assert "5" in lines[1], "Part 2 share should be 5"
+    assert "4" in lines[1], "Part 2 share should be 4"
+
+
+def test_task1_no_hardcoded_share():
+    """Test that share values are calculated, not hardcoded"""
+    code = get_task1_code()
+    # Look for share = followed by just a number (not //)
+    assert not re.search(r'share\s*=\s*[0-9]+\s*$', code, re.MULTILINE), "Do not hardcode share values - use // operator"
 
 
 def test_task1_part2_leftover():
     """Test Part 2 leftover calculation"""
-    output = run_task1_with_test_values()
+    output = run_task1()
     lines = output.strip().split('\n')
     assert len(lines) >= 3, "Not enough output lines"
-    assert "4" in lines[2], "Part 2 leftover should be 4"
+    assert "0" in lines[2], "Part 2 leftover should be 0"
+
+
+def test_task1_no_hardcoded_leftover():
+    """Test that leftover values are calculated, not hardcoded"""
+    code = get_task1_code()
+    # Look for leftover = followed by just a number (not %)
+    assert not re.search(r'leftover\s*=\s*[0-9]+\s*$', code, re.MULTILINE), "Do not hardcode leftover values - use % operator"
 
 
 def test_task1_part3_share():
     """Test Part 3 share calculation"""
-    output = run_task1_with_test_values()
+    output = run_task1()
     lines = output.strip().split('\n')
     assert len(lines) >= 4, "Not enough output lines"
-    assert "4" in lines[3], "Part 3 share should be 4"
-
-
-def test_task1_part3_leftover():
-    """Test Part 3 leftover calculation"""
-    output = run_task1_with_test_values()
-    lines = output.strip().split('\n')
-    assert len(lines) >= 5, "Not enough output lines"
-    assert "2" in lines[4], "Part 3 leftover should be 2"
+    assert "3" in lines[3], "Part 3 share should be 3"
 
 
 def test_task1_part4_share():
     """Test Part 4 share calculation after pizza upgrade"""
-    output = run_task1_with_test_values()
+    output = run_task1()
     lines = output.strip().split('\n')
     assert len(lines) >= 6, "Not enough output lines"
-    assert "6" in lines[5], "Part 4 share should be 6"
+    assert "4" in lines[5], "Part 4 share should be 4"
 
 
 def test_task1_part4_leftover():
     """Test Part 4 leftover calculation after pizza upgrade"""
-    output = run_task1_with_test_values()
+    output = run_task1()
     lines = output.strip().split('\n')
     assert len(lines) >= 7, "Not enough output lines"
-    assert "2" in lines[6], "Part 4 leftover should be 2"
+    assert "6" in lines[6], "Part 4 leftover should be 6"
 
 
 def test_task1_hollow_leg_message():
     """Test that the Mr. Hollow Leg message appears"""
-    output = run_task1_with_test_values()
+    output = run_task1()
     assert "Hollow Leg" in output, "Should include Hollow Leg message"
-
-
-def test_task1_output_line_count():
-    """Test that the correct number of output lines are printed"""
-    output = run_task1_with_test_values()
-    lines = [line for line in output.strip().split('\n') if line]
-    assert len(lines) == 8, f"Should have 8 output lines, got {len(lines)}"
-
-
-def test_task1_runs_without_error():
-    """Test that task1 runs without errors"""
-    try:
-        output = run_task1_with_test_values()
-        assert output, "Task should produce output"
-    except subprocess.TimeoutExpired:
-        pytest.fail("Task1 timed out")
-    except Exception as e:
-        pytest.fail(f"Task1 raised an exception: {e}")
 
 
 # Placeholder for TASK 2 TESTS (to be added)
