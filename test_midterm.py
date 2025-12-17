@@ -379,4 +379,198 @@ def test_task3_10_testing_flag_exists():
     assert hasattr(task3, 'TESTING'), "Missing TESTING flag variable"
 
 
-# Placeholder for TASK 4 TESTS (to be added)
+
+# TASK 4 TESTS
+# Debugging challenge - each test runs one corrected snippet
+
+def test_task4_snippet_1():
+    """Snippet 1: Missing colon"""
+    try:
+        old_stdout = sys.stdout
+        sys.stdout = StringIO()
+        
+        exec("""
+books = 12
+if books > 10:
+    print("You have a lot of books!")
+""")
+        output = sys.stdout.getvalue()
+        sys.stdout = old_stdout
+        
+        assert "You have a lot of books!" in output, "Snippet 1 not fixed correctly"
+    except SyntaxError:
+        pytest.fail("Snippet 1 has a syntax error - check for missing colon")
+
+
+def test_task4_snippet_2():
+    """Snippet 2: Unclosed string"""
+    try:
+        old_stdout = sys.stdout
+        sys.stdout = StringIO()
+        
+        exec("""
+favorite_color = "blue"
+print(favorite_color)
+""")
+        output = sys.stdout.getvalue()
+        sys.stdout = old_stdout
+        
+        assert "blue" in output, "Snippet 2 not fixed correctly"
+    except SyntaxError:
+        pytest.fail("Snippet 2 has a syntax error - check for unclosed string")
+
+
+def test_task4_snippet_3():
+    """Snippet 3: Variable name typo"""
+    try:
+        old_stdout = sys.stdout
+        sys.stdout = StringIO()
+        
+        exec("""
+cats = 3
+dogs = 2
+total_pets = cats + dogs
+print(f"Total pets: {total_pets}")
+""")
+        output = sys.stdout.getvalue()
+        sys.stdout = old_stdout
+        
+        assert "Total pets: 5" in output, "Snippet 3 not fixed correctly"
+    except NameError:
+        pytest.fail("Snippet 3 has a NameError - check variable names")
+
+
+def test_task4_snippet_4():
+    """Snippet 4: Indentation error"""
+    try:
+        old_stdout = sys.stdout
+        sys.stdout = StringIO()
+        
+        exec("""
+is_sunny = True
+if is_sunny:
+    message = "Wear sunglasses"
+    print(message)
+""")
+        output = sys.stdout.getvalue()
+        sys.stdout = old_stdout
+        
+        assert "Wear sunglasses" in output, "Snippet 4 not fixed correctly"
+    except IndentationError:
+        pytest.fail("Snippet 4 has an indentation error")
+
+
+def test_task4_snippet_5():
+    """Snippet 5: Missing closing parenthesis"""
+    try:
+        old_stdout = sys.stdout
+        sys.stdout = StringIO()
+        
+        exec("""
+distance = 50
+time = 2
+speed = distance / time
+print(f"Speed: {speed} mph")
+""")
+        output = sys.stdout.getvalue()
+        sys.stdout = old_stdout
+        
+        assert "Speed: 25.0 mph" in output, "Snippet 5 not fixed correctly"
+    except SyntaxError:
+        pytest.fail("Snippet 5 has a syntax error - check parentheses")
+
+
+def test_task4_snippet_6():
+    """Snippet 6: Wrong operator (= instead of ==)"""
+    try:
+        old_stdout = sys.stdout
+        sys.stdout = StringIO()
+        
+        exec("""
+level = 5
+if level == 5:
+    print("You reached level 5!")
+""")
+        output = sys.stdout.getvalue()
+        sys.stdout = old_stdout
+        
+        assert "You reached level 5!" in output, "Snippet 6 not fixed correctly"
+    except SyntaxError:
+        pytest.fail("Snippet 6 has a syntax error - check comparison operator")
+
+
+def test_task4_snippet_7():
+    """Snippet 7: Variable name typo"""
+    try:
+        old_stdout = sys.stdout
+        sys.stdout = StringIO()
+        
+        exec("""
+width = 8
+height = 10
+area = width * height
+print(f"Area: {area}")
+""")
+        output = sys.stdout.getvalue()
+        sys.stdout = old_stdout
+        
+        assert "Area: 80" in output, "Snippet 7 not fixed correctly"
+    except NameError:
+        pytest.fail("Snippet 7 has a NameError - check variable names")
+
+
+def test_task4_snippet_8():
+    """Snippet 8: Missing parentheses in print"""
+    try:
+        old_stdout = sys.stdout
+        sys.stdout = StringIO()
+        
+        exec("""
+name = "Sarah"
+print("Hello", name)
+""")
+        output = sys.stdout.getvalue()
+        sys.stdout = old_stdout
+        
+        assert "Hello" in output and "Sarah" in output, "Snippet 8 not fixed correctly"
+    except SyntaxError:
+        pytest.fail("Snippet 8 has a syntax error - check print statement")
+
+
+def test_task4_snippet_9():
+    """Snippet 9: Indentation error with else"""
+    try:
+        old_stdout = sys.stdout
+        sys.stdout = StringIO()
+        
+        exec("""
+hungry = False
+if hungry:
+    print("Time to eat!")
+else:
+    print("Not hungry yet")
+""")
+        output = sys.stdout.getvalue()
+        sys.stdout = old_stdout
+        
+        assert "Not hungry yet" in output, "Snippet 9 not fixed correctly"
+    except IndentationError:
+        pytest.fail("Snippet 9 has an indentation error - check else block")
+
+
+def test_task4_snippet_10():
+    """Snippet 10: Unclosed string in f-string"""
+    try:
+        old_stdout = sys.stdout
+        sys.stdout = StringIO()
+        
+        exec("""
+age = 15
+print(f"I am {age} years old")
+""")
+        output = sys.stdout.getvalue()
+        sys.stdout = old_stdout
+        
+        assert "I am 15 years old" in output, "Snippet 10 not fixed correctly"
+    except SyntaxError:
+        pytest.fail("Snippet 10 has a syntax error - check for unclosed string")
