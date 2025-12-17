@@ -22,112 +22,6 @@ def run_task1_with_values(party_pizza_mini, large, medium, people):
         with open('task1.py', 'r') as f:
             student_code = f.read()
         
-        # Create namespace with test variables
-        namespace = {
-            'party_pizza_mini': party_pizza_mini,
-            'large': large,
-            'medium': medium,
-            'people': people
-        }
-        
-        # Execute student code with test variables
-        exec(student_code, namespace)
-        
-        # Get output
-        output = sys.stdout.getvalue()
-        return output
-    finally:
-        sys.stdout = old_stdout
-
-
-def test_task1_initial_slices():
-    """Test that initial slice count is calculated correctly"""
-    output = run_task1_with_values(16, 10, 8, 5)
-    assert "34" in output, "Initial slice count should be 34"
-
-
-def test_task1_part2_share():
-    """Test Part 2 share calculation"""
-    output = run_task1_with_values(16, 10, 8, 5)
-    lines = output.strip().split('\n')
-    assert len(lines) >= 2, "Not enough output lines"
-    assert "5" in lines[1], "Part 2 share should be 5"
-
-
-def test_task1_part2_leftover():
-    """Test Part 2 leftover calculation"""
-    output = run_task1_with_values(16, 10, 8, 5)
-    lines = output.strip().split('\n')
-    assert len(lines) >= 3, "Not enough output lines"
-    assert "4" in lines[2], "Part 2 leftover should be 4"
-
-
-def test_task1_part3_share():
-    """Test Part 3 share calculation"""
-    output = run_task1_with_values(16, 10, 8, 5)
-    lines = output.strip().split('\n')
-    assert len(lines) >= 4, "Not enough output lines"
-    assert "4" in lines[3], "Part 3 share should be 4"
-
-
-def test_task1_part3_leftover():
-    """Test Part 3 leftover calculation"""
-    output = run_task1_with_values(16, 10, 8, 5)
-    lines = output.strip().split('\n')
-    assert len(lines) >= 5, "Not enough output lines"
-    assert "2" in lines[4], "Part 3 leftover should be 2"
-
-
-def test_task1_part4_share():
-    """Test Part 4 share calculation after pizza upgrade"""
-    output = run_task1_with_values(16, 10, 8, 5)
-    lines = output.strip().split('\n')
-    assert len(lines) >= 6, "Not enough output lines"
-    assert "6" in lines[5], "Part 4 share should be 6"
-
-
-def test_task1_part4_leftover():
-    """Test Part 4 leftover calculation after pizza upgrade"""
-    output = run_task1_with_values(16, 10, 8, 5)
-    lines = output.strip().split('\n')
-    assert len(lines) >= 7, "Not enough output lines"
-    assert "2" in lines[6], "Part 4 leftover should be 2"
-
-
-def test_task1_hollow_leg_message():
-    """Test that the Mr. Hollow Leg message appears"""
-    output = run_task1_with_values(16, 10, 8, 5)
-    assert "Hollow Leg" in output, "Should include Hollow Leg message"
-
-
-def test_task1_output_line_count():
-    """Test that the correct number of output lines are printed"""
-    output = run_task1_with_values(16, 10, 8, 5)
-    lines = [line for line in output.strip().split('\n') if line]
-    assert len(lines) == 8, f"Should have 8 output lines, got {len(lines)}"
-
-
-def test_task1_different_values():
-    """Test with completely different values to ensure no hardcoding"""
-    output = run_task1_with_values(20, 12, 10, 8)
-    lines = output.strip().split('\n')
-    # 20+12+10 = 42 slices
-    assert "42" in lines[0], "Should calculate slices from variables"
-    # 42 // 9 people = 4 share, 6 leftover (part 2)
-    assert "4" in lines[1], "Part 2 share should use variable values"
-
-
-def run_task1_with_values(party_pizza_mini, large, medium, people):
-    """Run task1.py with given variable values and return output"""
-    # Capture stdout
-    old_stdout = sys.stdout
-    sys.stdout = StringIO()
-    
-    try:
-        # Read student code
-        with open('task1.py', 'r') as f:
-            student_code = f.read()
-        
         # Replace smart quotes with regular quotes
         student_code = student_code.replace('"', '"').replace('"', '"').replace("'", "'").replace("'", "'")
         
@@ -340,5 +234,149 @@ def test_task2_different_values():
     # /2 = 66.0
     assert "66" in output, "Should work with different variable values"
 
-# Placeholder for TASK 3 TESTS (to be added)
+
+
+# TASK 3 TESTS
+# Uses original import approach - students submit complete file
+
+task3_hardcoded = False
+
+def test_task3_01_check_hardcoding():
+    """Check for hard-coding - if detected, all other tests will fail"""
+    global task3_hardcoded
+    
+    try:
+        with open('task3.py', 'r') as f:
+            code = f.read()
+        
+        old_stdout = sys.stdout
+        sys.stdout = StringIO()
+        
+        try:
+            from unittest.mock import patch
+            with patch('builtins.input', side_effect=["Phoenix Feather", "14.99", "5"]):
+                namespace = {}
+                exec(code, namespace)
+                output = sys.stdout.getvalue()
+        finally:
+            sys.stdout = old_stdout
+        
+        expected_subtotal = 74.95
+        expected_total = 82.07
+        
+        if 'subtotal' in namespace and namespace['subtotal'] != expected_subtotal:
+            task3_hardcoded = True
+            pytest.fail("Hard-coding detected - all tests will fail")
+        
+        if 'total' in namespace and namespace['total'] != expected_total:
+            task3_hardcoded = True
+            pytest.fail("Hard-coding detected - all tests will fail")
+        
+        if "74.95" not in output or "82.07" not in output:
+            task3_hardcoded = True
+            pytest.fail("Hard-coding detected - all tests will fail")
+            
+    except AssertionError:
+        raise
+    except Exception:
+        pass
+
+
+def import_and_run_task3():
+    """Helper function to import task3 and capture output"""
+    assert not task3_hardcoded, "Hard-coding detected - no points awarded"
+    
+    old_stdout = sys.stdout
+    sys.stdout = StringIO()
+    
+    if 'task3' in sys.modules:
+        del sys.modules['task3']
+    
+    from unittest.mock import patch
+    with patch('builtins.input', side_effect=["Crystal Ball", "39.99", "2"]):
+        import task3
+        output = sys.stdout.getvalue()
+    
+    sys.stdout = old_stdout
+    return task3, output
+
+
+def test_task3_02_required_variables_exist():
+    """Test that all required variables exist"""
+    assert not task3_hardcoded, "Hard-coding detected - no points awarded"
+    task3, output = import_and_run_task3()
+    assert hasattr(task3, 'item'), "Missing required variable: item"
+    assert hasattr(task3, 'price'), "Missing required variable: price"
+    assert hasattr(task3, 'quantity'), "Missing required variable: quantity"
+    assert hasattr(task3, 'subtotal'), "Missing required variable: subtotal"
+    assert hasattr(task3, 'tax'), "Missing required variable: tax"
+    assert hasattr(task3, 'total'), "Missing required variable: total"
+
+
+def test_task3_03_get_purchase_info_function_exists():
+    """Test that get_purchase_info function exists"""
+    assert not task3_hardcoded, "Hard-coding detected - no points awarded"
+    task3, output = import_and_run_task3()
+    assert hasattr(task3, 'get_purchase_info'), "Missing required function: get_purchase_info"
+    assert callable(task3.get_purchase_info), "get_purchase_info must be a function"
+
+
+def test_task3_04_subtotal_value():
+    """Test subtotal calculation"""
+    assert not task3_hardcoded, "Hard-coding detected - no points awarded"
+    task3, output = import_and_run_task3()
+    expected_subtotal = 79.98
+    assert task3.subtotal == expected_subtotal, f"subtotal has incorrect value. Expected {expected_subtotal}, got {task3.subtotal}"
+
+
+def test_task3_05_tax_value():
+    """Test tax calculation"""
+    assert not task3_hardcoded, "Hard-coding detected - no points awarded"
+    task3, output = import_and_run_task3()
+    expected_tax = 7.5981
+    assert abs(task3.tax - expected_tax) < 0.0001, f"tax has incorrect value. Expected approximately {expected_tax}, got {task3.tax}"
+
+
+def test_task3_06_total_value():
+    """Test total calculation and rounding"""
+    assert not task3_hardcoded, "Hard-coding detected - no points awarded"
+    task3, output = import_and_run_task3()
+    expected_total = 87.58
+    assert task3.total == expected_total, f"total has incorrect value. Expected {expected_total}, got {task3.total}"
+
+
+def test_task3_07_menu_displayed():
+    """Test that menu is displayed"""
+    assert not task3_hardcoded, "Hard-coding detected - no points awarded"
+    task3, output = import_and_run_task3()
+    assert "PECULIAR EMPORIUM" in output, "Menu header not displayed"
+    assert "Crystal Ball" in output, "Menu items not displayed"
+
+
+def test_task3_08_receipt_formatted_correctly():
+    """Test receipt shows all required elements"""
+    assert not task3_hardcoded, "Hard-coding detected - no points awarded"
+    task3, output = import_and_run_task3()
+    assert "x2" in output, "Receipt should show quantity"
+    assert "39.99" in output, "Receipt should show item price"
+    assert "Subtotal:" in output, "Subtotal label missing"
+    assert "Tax:" in output, "Tax label missing"
+    assert "Total:" in output, "Total label missing"
+
+
+def test_task3_09_output_has_decimal_formatting():
+    """Test that monetary values are properly formatted"""
+    assert not task3_hardcoded, "Hard-coding detected - no points awarded"
+    task3, output = import_and_run_task3()
+    assert "79.98" in output or str(task3.subtotal) in output, "Subtotal should be displayed"
+    assert "87.58" in output or str(task3.total) in output, "Total should be displayed"
+
+
+def test_task3_10_testing_flag_exists():
+    """Test that TESTING flag exists and works"""
+    assert not task3_hardcoded, "Hard-coding detected - no points awarded"
+    task3, output = import_and_run_task3()
+    assert hasattr(task3, 'TESTING'), "Missing TESTING flag variable"
+
+
 # Placeholder for TASK 4 TESTS (to be added)
